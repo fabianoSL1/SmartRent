@@ -1,6 +1,6 @@
 package com.ufrrj.smartrent.vehicle.model;
 
-import com.ufrrj.smartrent.user.model.User;
+import com.ufrrj.smartrent.user.model.Owner;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -20,7 +20,7 @@ public class Vehicle {
     private long id;
 
     @ManyToOne(optional = false)
-    private User owner;
+    private Owner owner;
 
     @CreationTimestamp
     private LocalDateTime createdAt;

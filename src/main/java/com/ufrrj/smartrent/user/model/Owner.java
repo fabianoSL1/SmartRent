@@ -6,11 +6,13 @@ import com.ufrrj.smartrent.vehicle.model.Vehicle;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Builder
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity()
@@ -19,7 +21,7 @@ public class Owner {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @OneToOne
     private User user;

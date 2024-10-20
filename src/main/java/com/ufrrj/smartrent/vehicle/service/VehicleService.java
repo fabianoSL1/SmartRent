@@ -1,6 +1,6 @@
 package com.ufrrj.smartrent.vehicle.service;
 
-import com.ufrrj.smartrent.user.service.UserService;
+import com.ufrrj.smartrent.user.repository.OwnerRepository;
 import com.ufrrj.smartrent.vehicle.model.Vehicle;
 import com.ufrrj.smartrent.vehicle.repository.VehicleRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +14,7 @@ public class VehicleService {
 
     private final VehicleRepository vehicleRepository;
 
-    private final UserService userService;
+    private final OwnerRepository ownerRepository;
 
     public List<Vehicle> getAllVehicles() {
         return vehicleRepository.findAll();
@@ -35,10 +35,10 @@ public class VehicleService {
     }
 
     public Vehicle createVehicle(String username) {
-        var user = userService.findUserByUsername(username);
+        var owner = ownerRepository.findOwnerByUserUsername(username);
 
         var vehicle = Vehicle.builder()
-                .owner(user)
+                .owner(owner)
                 .build();
 
         return this.saveVehicle(vehicle);

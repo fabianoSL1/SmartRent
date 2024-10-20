@@ -29,6 +29,7 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
 
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));

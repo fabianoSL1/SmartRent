@@ -1,7 +1,7 @@
 package com.ufrrj.smartrent.rent.model;
 
 import com.ufrrj.smartrent.rent.enums.ProposalStatus;
-import com.ufrrj.smartrent.user.model.User;
+import com.ufrrj.smartrent.user.model.Renter;
 import com.ufrrj.smartrent.vehicle.model.Vehicle;
 import jakarta.persistence.*;
 import lombok.*;
@@ -19,7 +19,7 @@ public class Proposal {
     private long id;
 
     @OneToOne
-    private User renter;
+    private Renter renter;
 
     @OneToOne
     private Vehicle vehicle;

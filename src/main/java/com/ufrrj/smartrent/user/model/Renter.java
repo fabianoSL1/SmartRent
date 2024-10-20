@@ -6,9 +6,11 @@ import com.ufrrj.smartrent.vehicle.model.Vehicle;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Builder
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity()
@@ -17,13 +19,13 @@ public class Renter {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @OneToOne
     private User user;
 
     public Proposal createProposal(Vehicle vehicle) {
-        if (vehicle.getOwner().getId() == user.getId()) {
+        if (vehicle.getOwner().getUser().getId() == this.user.getId()) {
             throw new RuntimeException("Owner cannot rent");
         }
 
@@ -32,10 +34,10 @@ public class Renter {
         }
 
         return Proposal.builder()
-            .renter(this.user)
-            .vehicle(vehicle)
-            .status(ProposalStatus.PENDING)
-            .build();
+                .renter(this)
+                .vehicle(vehicle)
+                .status(ProposalStatus.PENDING)
+                .build();
     }
 
     public void cancelProposal(Proposal proposal) {
