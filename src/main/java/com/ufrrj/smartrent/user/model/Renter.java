@@ -26,7 +26,7 @@ public class Renter {
 
     public Proposal createProposal(Vehicle vehicle) {
         if (vehicle.getOwner().getUser().getId() == this.user.getId()) {
-            throw new RuntimeException("Owner cannot rent");
+            throw new RuntimeException("Owner cannot be renter");
         }
 
         if (!vehicle.isAvailable()) {
