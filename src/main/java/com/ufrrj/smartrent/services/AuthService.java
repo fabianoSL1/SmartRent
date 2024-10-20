@@ -1,6 +1,6 @@
 package com.ufrrj.smartrent.services;
 
-import com.ufrrj.smartrent.utils.JwtUtils;
+import com.ufrrj.smartrent.utils.security.JwtUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

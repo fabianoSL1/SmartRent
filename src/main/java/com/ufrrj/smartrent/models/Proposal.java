@@ -4,8 +4,6 @@ import com.ufrrj.smartrent.enums.ProposalStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.UUID;
-
 @Builder
 @Getter
 @Entity(name = "proposals")
@@ -14,8 +12,8 @@ import java.util.UUID;
 public class Proposal {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     @OneToOne
     private Renter renter;

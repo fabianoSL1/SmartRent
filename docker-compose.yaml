@@ -1,0 +1,10 @@
+services:
+  database:
+    image: postgres:16
+    environment:
+      POSTGRES_PASSWORD: local
+      POSTGRES_DB: smart_rent
+      POSTGRES_USER: local
+
+    ports:
+      - '5432:5432'

@@ -9,7 +9,7 @@ import java.util.UUID;
 @Builder
 public class RegisterResponse {
 
-    private UUID id;
+    private long id;
 
     private String username;
 

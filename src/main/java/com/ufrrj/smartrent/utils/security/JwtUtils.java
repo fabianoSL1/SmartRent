@@ -1,4 +1,4 @@
-package com.ufrrj.smartrent.utils;
+package com.ufrrj.smartrent.utils.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -21,6 +21,7 @@ public class JwtUtils {
         Algorithm algorithm = Algorithm.HMAC256(secret);
 
         return JWT.create()
+                .withIssuer("smart-rent-api")
                 .withClaim("sub", user.getUsername())
                 .withClaim("roles", user.getAuthorities()
                         .stream()

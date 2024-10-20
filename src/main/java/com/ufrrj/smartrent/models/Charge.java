@@ -13,8 +13,8 @@ import java.time.LocalDateTime;
 public class Charge {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     private int amount;
 

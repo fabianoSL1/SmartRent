@@ -2,8 +2,12 @@ package com.ufrrj.smartrent.models;
 
 import com.ufrrj.smartrent.enums.ProposalStatus;
 import jakarta.persistence.Entity;
+import lombok.AllArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
-@Entity
+@SuperBuilder
+@AllArgsConstructor
+@Entity()
 public class Owner extends User {
 
     public void approveProposal(Proposal proposal) {

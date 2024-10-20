@@ -1,4 +1,4 @@
-package com.ufrrj.smartrent.utils;
+package com.ufrrj.smartrent.utils.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

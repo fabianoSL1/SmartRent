@@ -5,14 +5,13 @@ import com.ufrrj.smartrent.enums.RentStatus;
 import jakarta.persistence.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @Entity(name = "rents")
 public class Rent {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     @OneToOne
     private Proposal proposal;
