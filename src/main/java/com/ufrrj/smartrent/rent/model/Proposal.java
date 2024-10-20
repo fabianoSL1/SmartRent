@@ -18,14 +18,15 @@ public class Proposal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne
+    @OneToOne(optional = false)
     private Renter renter;
 
-    @OneToOne
+    @OneToOne(optional = false)
     private Vehicle vehicle;
 
     @Setter
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private ProposalStatus status;
 
 }

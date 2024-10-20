@@ -18,14 +18,18 @@ public class Charge {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(nullable = false)
     private int amount;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Rent rent;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private ChargeStatus status;
 
     @CreationTimestamp
+    @Column(nullable = false)
     private LocalDateTime createdAt;
 
     @UpdateTimestamp

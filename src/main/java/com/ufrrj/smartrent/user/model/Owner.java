@@ -2,14 +2,11 @@ package com.ufrrj.smartrent.user.model;
 
 import com.ufrrj.smartrent.rent.enums.ProposalStatus;
 import com.ufrrj.smartrent.rent.model.Proposal;
-import com.ufrrj.smartrent.vehicle.model.Vehicle;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Builder
 @Getter
@@ -23,22 +20,25 @@ public class Owner {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne
+    @OneToOne(optional = false)
     private User user;
-
-    @OneToMany
-    List<Vehicle> vehicles;
 
 
     public void approveProposal(Proposal proposal) {
-        verify(proposal, ProposalStatus.APPROVED);
+        changeStatus(proposal, ProposalStatus.APPROVED);
+        proposal.getVehicle().setAvailable(false);
     }
 
     public void rejectProposal(Proposal proposal) {
-        verify(proposal, ProposalStatus.REJECTED);
+        changeStatus(proposal, ProposalStatus.REJECTED);
+        proposal.getVehicle().setAvailable(true);
     }
 
-    private static void verify(Proposal proposal, ProposalStatus status) {
+    private void changeStatus(Proposal proposal, ProposalStatus status) {
+        if (proposal.getVehicle().getOwner().getId() != this.id) {
+            throw new RuntimeException("Only owner");
+        }
+
         if (!proposal.getStatus().equals(ProposalStatus.PENDING)) {
             throw new RuntimeException("Proposal is not pending");
         }

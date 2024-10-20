@@ -4,9 +4,11 @@ import com.ufrrj.smartrent.payment.enums.ChargeStatus;
 import com.ufrrj.smartrent.rent.enums.RentStatus;
 import com.ufrrj.smartrent.payment.model.Charge;
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.util.List;
 
+@Getter
 @Entity()
 @Table(name = "rents")
 public class Rent {
@@ -18,6 +20,8 @@ public class Rent {
     @OneToOne
     private Proposal proposal;
 
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private RentStatus status;
 
     @OneToMany

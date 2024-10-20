@@ -21,7 +21,7 @@ public class Renter {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne
+    @OneToOne(optional = false)
     private User user;
 
     public Proposal createProposal(Vehicle vehicle) {
@@ -41,6 +41,11 @@ public class Renter {
     }
 
     public void cancelProposal(Proposal proposal) {
+        if (proposal.getRenter().id != this.id) {
+            throw new RuntimeException("Only renter can be cancelled");
+        }
+
+        proposal.getVehicle().setAvailable(true);
         proposal.setStatus(ProposalStatus.CANCELLED);
     }
 }
