@@ -1,6 +1,10 @@
 package com.ufrrj.smartrent.user.service;
 
+import com.ufrrj.smartrent.user.model.Owner;
+import com.ufrrj.smartrent.user.model.Renter;
 import com.ufrrj.smartrent.user.model.User;
+import com.ufrrj.smartrent.user.repository.OwnerRepository;
+import com.ufrrj.smartrent.user.repository.RenterRepository;
 import com.ufrrj.smartrent.user.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -16,28 +20,31 @@ public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
+    private final OwnerRepository ownerRepository;
+
+    private final RenterRepository renterRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return this.findUserByUsername(username);
     }
 
-    public User findUserByUsername(String username) throws UsernameNotFoundException {
+    public User findUserByUsername(String username) throws RuntimeException {
         var user = userRepository.findByUsername(username);
 
         if (user.isEmpty()) {
-            throw new UsernameNotFoundException(username);
+            throw new RuntimeException("user not found");
         }
 
         return user.get();
     }
 
-    @Transactional
-    public User saveUser(String username, String password) {
+    @Transactional()
+    public User saveUser(String username, String password) throws Error {
         var exist = userRepository.findByUsername(username);
 
         if (exist.isPresent()) {
-            throw new Error("");
+            throw new RuntimeException("Username " + username + " already exists");
         }
 
         var encrypt = new BCryptPasswordEncoder().encode(password);
@@ -47,8 +54,29 @@ public class UserService implements UserDetailsService {
                 .password(encrypt)
                 .build();
 
+        userRepository.save(user);
+
+        saveOwner(user);
+
+        saveRenter(user);
+
         return userRepository.save(user);
     }
 
+    private void saveRenter(User user) {
+        var renter = Renter.builder()
+            .user(user)
+            .build();
+
+        renterRepository.save(renter);
+    }
+
+    private void saveOwner(User user) {
+        var owner = Owner.builder()
+                .user(user)
+                .build();
+
+        ownerRepository.save(owner);
+    }
 
 }

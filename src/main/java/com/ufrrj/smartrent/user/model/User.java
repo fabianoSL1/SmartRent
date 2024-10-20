@@ -1,9 +1,10 @@
 package com.ufrrj.smartrent.user.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,9 +12,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-@SuperBuilder
+@Builder
 @NoArgsConstructor
-@Data
+@AllArgsConstructor
+@Getter
 @Entity()
 @Table(name = "users")
 public class User implements UserDetails {
