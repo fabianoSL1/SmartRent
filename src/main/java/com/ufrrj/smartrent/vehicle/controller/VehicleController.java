@@ -47,7 +47,7 @@ public class VehicleController {
                 .id(vehicle.getId())
                 .ownerId(vehicle.getOwner().getId())
                 .available(vehicle.isAvailable())
-                .createdAt(vehicle.getCreatedAt())
+                .createdAt(vehicle.getRegisteredAt())
                 .build();
     }
 }

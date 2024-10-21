@@ -35,9 +35,11 @@ public class Vehicle {
     private String color;
 
     @CreationTimestamp
-    private LocalDateTime registerAt;
+    @Column(nullable = false)
+    private LocalDateTime registeredAt;
 
     @Setter
+    @Column(nullable = false)
     private boolean available;
 
 }
