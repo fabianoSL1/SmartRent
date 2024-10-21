@@ -4,10 +4,12 @@ import com.ufrrj.smartrent.payment.enums.ChargeStatus;
 import com.ufrrj.smartrent.rent.model.Rent;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Entity()
@@ -24,6 +26,10 @@ public class Charge {
     @ManyToOne(optional = false)
     private Rent rent;
 
+    @OneToMany
+    private List<Transaction> transactions;
+
+    @Setter
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private ChargeStatus status;

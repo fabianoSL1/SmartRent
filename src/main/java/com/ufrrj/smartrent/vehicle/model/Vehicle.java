@@ -22,8 +22,20 @@ public class Vehicle {
     @ManyToOne(optional = false)
     private Owner owner;
 
+    @Column(nullable = false)
+    private String identifier;
+
+    @Column(nullable = false)
+    private String model;
+
+    @Column(nullable = false)
+    private String brand;
+
+    @Column(nullable = false)
+    private String color;
+
     @CreationTimestamp
-    private LocalDateTime createdAt;
+    private LocalDateTime registerAt;
 
     @Setter
     private boolean available;

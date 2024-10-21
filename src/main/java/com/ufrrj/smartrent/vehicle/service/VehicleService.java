@@ -1,6 +1,5 @@
 package com.ufrrj.smartrent.vehicle.service;
 
-import com.ufrrj.smartrent.user.repository.OwnerRepository;
 import com.ufrrj.smartrent.user.service.OwnerService;
 import com.ufrrj.smartrent.vehicle.model.Vehicle;
 import com.ufrrj.smartrent.vehicle.repository.VehicleRepository;
