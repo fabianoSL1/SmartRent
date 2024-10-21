@@ -1,4 +1,4 @@
-package com.ufrrj.smartrent.PaymentGateway;
+package com.ufrrj.smartrent.payment.PaymentGateway;
 
 import com.ufrrj.smartrent.payment.model.Charge;
 import com.ufrrj.smartrent.payment.model.Transaction;
