@@ -1,5 +1,6 @@
 package com.ufrrj.smartrent.user.service;
 
+import com.ufrrj.smartrent.common.exception.NotFoundException;
 import com.ufrrj.smartrent.user.model.Renter;
 import com.ufrrj.smartrent.user.repository.RenterRepository;
 import com.ufrrj.smartrent.user.repository.UserRepository;
@@ -23,7 +24,7 @@ public class RenterService {
         var user = userRepository.findByUsername(username);
 
         if (user.isEmpty()) {
-            throw new RuntimeException("User not found");
+            throw new NotFoundException("User not found");
         }
 
         var renter = Renter.builder()

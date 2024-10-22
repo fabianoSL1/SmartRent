@@ -1,5 +1,6 @@
 package com.ufrrj.smartrent.vehicle.service;
 
+import com.ufrrj.smartrent.common.exception.NotFoundException;
 import com.ufrrj.smartrent.user.service.OwnerService;
 import com.ufrrj.smartrent.vehicle.model.Vehicle;
 import com.ufrrj.smartrent.vehicle.repository.VehicleRepository;
@@ -24,7 +25,7 @@ public class VehicleService {
         var vehicle = vehicleRepository.findById(id);
 
         if (vehicle.isEmpty()) {
-            throw new RuntimeException("Vehicle with id " + id + " not found");
+            throw new NotFoundException("Vehicle with id " + id + " not found");
         }
 
         return vehicle.get();

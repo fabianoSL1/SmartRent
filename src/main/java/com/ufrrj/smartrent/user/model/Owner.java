@@ -1,5 +1,6 @@
 package com.ufrrj.smartrent.user.model;
 
+import com.ufrrj.smartrent.common.exception.DomainException;
 import com.ufrrj.smartrent.rent.enums.ProposalStatus;
 import com.ufrrj.smartrent.rent.model.Proposal;
 import jakarta.persistence.*;
@@ -36,11 +37,11 @@ public class Owner {
 
     private void changeStatus(Proposal proposal, ProposalStatus status) {
         if (proposal.getVehicle().getOwner().getId() != this.id) {
-            throw new RuntimeException("Only owner");
+            throw new DomainException("Only owner");
         }
 
         if (!proposal.getStatus().equals(ProposalStatus.PENDING)) {
-            throw new RuntimeException("Proposal is not pending");
+            throw new DomainException("Proposal is not pending");
         }
 
         proposal.setStatus(status);

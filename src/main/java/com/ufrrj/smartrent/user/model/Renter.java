@@ -1,5 +1,6 @@
 package com.ufrrj.smartrent.user.model;
 
+import com.ufrrj.smartrent.common.exception.DomainException;
 import com.ufrrj.smartrent.rent.enums.ProposalStatus;
 import com.ufrrj.smartrent.rent.model.Proposal;
 import com.ufrrj.smartrent.vehicle.model.Vehicle;
@@ -26,11 +27,11 @@ public class Renter {
 
     public Proposal createProposal(Vehicle vehicle) {
         if (vehicle.getOwner().getUser().getId() == this.user.getId()) {
-            throw new RuntimeException("Owner cannot be renter");
+            throw new DomainException("Owner cannot be renter");
         }
 
         if (!vehicle.isAvailable()) {
-            throw new RuntimeException("Vehicle is not available");
+            throw new DomainException("Vehicle is not available");
         }
 
         return Proposal.builder()
@@ -42,7 +43,7 @@ public class Renter {
 
     public void cancelProposal(Proposal proposal) {
         if (proposal.getRenter().id != this.id) {
-            throw new RuntimeException("Only renter can be cancelled");
+            throw new DomainException("Only renter can be cancelled");
         }
 
         proposal.getVehicle().setAvailable(true);

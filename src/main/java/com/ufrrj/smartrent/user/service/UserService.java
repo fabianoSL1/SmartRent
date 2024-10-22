@@ -1,5 +1,6 @@
 package com.ufrrj.smartrent.user.service;
 
+import com.ufrrj.smartrent.common.exception.NotFoundException;
 import com.ufrrj.smartrent.user.model.Owner;
 import com.ufrrj.smartrent.user.model.Renter;
 import com.ufrrj.smartrent.user.model.User;
@@ -33,7 +34,7 @@ public class UserService implements UserDetailsService {
         var user = userRepository.findByUsername(username);
 
         if (user.isEmpty()) {
-            throw new RuntimeException("user not found");
+            throw new NotFoundException("user not found");
         }
 
         return user.get();
@@ -44,7 +45,7 @@ public class UserService implements UserDetailsService {
         var exist = userRepository.findByUsername(username);
 
         if (exist.isPresent()) {
-            throw new RuntimeException("Username " + username + " already exists");
+            throw new NotFoundException("Username " + username + " already exists");
         }
 
         var encrypt = new BCryptPasswordEncoder().encode(password);
