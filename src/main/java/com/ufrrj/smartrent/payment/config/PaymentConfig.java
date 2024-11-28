@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 public class PaymentConfig {
 
     @Bean
-    public PaymentGateway paymentGateway() {
+    PaymentGateway paymentGateway() {
         return new PaymentGatewayMock();
     }
 
