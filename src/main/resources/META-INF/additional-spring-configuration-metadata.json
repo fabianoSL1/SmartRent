@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "api.callstack",
+    "type": "java.lang.String",
+    "description": "retorno de erros na api"
+  },
+  {
+    "name": "api.security.jwt.secret",
+    "type": "java.lang.String",
+    "description": "secret para autenticação jwt"
+  }
+]}
