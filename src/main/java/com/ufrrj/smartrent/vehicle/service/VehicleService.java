@@ -39,6 +39,10 @@ public class VehicleService {
         var owner = ownerService.findOwnerByUsername(username);
 
         var vehicle = Vehicle.builder()
+                .brand("toyota")
+                .color("red")
+                .identifier("TTY-8565")
+                .model("SUPRA 98")
                 .owner(owner)
                 .build();
 
