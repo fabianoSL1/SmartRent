@@ -18,14 +18,12 @@ public class ProposalController {
     @PostMapping
     public ResponseEntity<ProposalResponse> createProposal(@RequestBody CreateProposalRequest request) {
         var proposal = proposalService.createProposal(request.getVehicleId());
-
         return ResponseEntity.status(201).body(createProposalResponse(proposal));
     }
 
     @PatchMapping("/{proposalId}/approve")
     public ResponseEntity<ProposalResponse> approveProposal(@PathVariable long proposalId) {
         var proposal = proposalService.approveProposal(proposalId);
-
         return ResponseEntity.ok(createProposalResponse(proposal));
     }
 

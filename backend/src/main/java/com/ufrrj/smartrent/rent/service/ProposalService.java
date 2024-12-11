@@ -1,5 +1,6 @@
 package com.ufrrj.smartrent.rent.service;
 
+import com.ufrrj.smartrent.common.exception.NotFoundException;
 import com.ufrrj.smartrent.rent.model.Proposal;
 import com.ufrrj.smartrent.rent.repository.ProposalRepository;
 import com.ufrrj.smartrent.user.service.OwnerService;
@@ -64,6 +65,6 @@ public class ProposalService {
 
     private Proposal getProposal(long proposalId) {
         return proposalRepository.findById(proposalId)
-                .orElseThrow(() -> new RuntimeException("Proposal with id " + proposalId + " not found"));
+                .orElseThrow(() -> new NotFoundException("Proposta não encontrada"));
     }
 }

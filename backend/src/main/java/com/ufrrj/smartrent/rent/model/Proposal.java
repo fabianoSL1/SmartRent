@@ -24,6 +24,8 @@ public class Proposal {
     @OneToOne(optional = false)
     private Vehicle vehicle;
 
+    private int amount;
+    
     @Setter
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)

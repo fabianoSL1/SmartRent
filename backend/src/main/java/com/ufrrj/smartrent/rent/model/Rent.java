@@ -6,12 +6,19 @@ import com.ufrrj.smartrent.payment.model.Charge;
 import jakarta.persistence.*;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Entity()
 @Table(name = "rents")
 public class Rent {
+
+    public Rent(Proposal proposal) {
+        this.proposal = proposal;
+        this.charges = new ArrayList<>();
+        this.status = RentStatus.PENDING_PAYMENT;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

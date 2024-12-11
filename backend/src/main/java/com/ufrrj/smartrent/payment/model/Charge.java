@@ -16,6 +16,11 @@ import java.util.List;
 @Table(name = "charges")
 public class Charge {
 
+    public Charge(Rent rent) {
+        this.rent = rent;
+        this.amount = rent.getProposal().getAmount();
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
