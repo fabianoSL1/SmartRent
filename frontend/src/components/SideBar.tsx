@@ -7,7 +7,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible"
-import { Menu, Car, UserPlus, Settings, LogOut, FileText, ChevronDown } from 'lucide-react'
+import { Menu, Car, Settings, LogOut, FileText, ChevronDown } from 'lucide-react'
 import { useState } from "react"
 import { NavLink } from "react-router"
 
@@ -41,12 +41,7 @@ function SidebarContent() {
     <ScrollArea className="h-full py-6">
       <div className="px-3 py-2">
         <h2 className="mb-2 px-4 text-lg font-semibold text-purple-700">SMART RENT</h2>
-        <Button variant="ghost" className="w-full justify-start hover:bg-purple-100 hover:text-purple-700" asChild>
-            <NavLink to="/adicionar-veiculo">
-              <UserPlus className="mr-2 h-4 w-4" />
-              Adicionar Veículo
-            </NavLink>
-          </Button>
+        
 
         <div className="space-y-1">
           <Button variant="ghost" className="w-full justify-start hover:bg-purple-100 hover:text-purple-700" asChild>

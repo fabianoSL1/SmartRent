@@ -1,10 +1,10 @@
 package com.ufrrj.smartrent.rent.dtos;
 
 import com.ufrrj.smartrent.rent.enums.ProposalStatus;
-import lombok.Builder;
+import com.ufrrj.smartrent.rent.model.Proposal;
+
 import lombok.Data;
 
-@Builder
 @Data
 public class ProposalResponse {
 
@@ -14,9 +14,16 @@ public class ProposalResponse {
 
     private long vehicleId;
 
-    private long ownerId;
+    private int amount;
 
     private ProposalStatus status;
 
 
+    public ProposalResponse(Proposal proposal) {
+        this.id = proposal.getId();
+        this.renterId = proposal.getRenter().getId();
+        this.vehicleId = proposal.getVehicle().getId();
+        this.amount = proposal.getAmount();
+        this.status = proposal.getStatus();
+    }
 }

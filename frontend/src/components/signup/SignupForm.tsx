@@ -5,18 +5,21 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { register } from "@/lib/authService"
 
 export default function RegistrationForm() {
   const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
+  const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Add your registration logic here
-    console.log("Registration attempted with:", { name, email, password, confirmPassword })
-    // For demo purposes, let's just redirect to the login page
+
+    register({
+      username,
+      password
+    })
   }
 
   return (
@@ -39,13 +42,13 @@ export default function RegistrationForm() {
               />
             </div>
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">Usuario</Label>
               <Input
                 id="email"
-                type="email"
+                type="text"
                 placeholder="Digite seu email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 required
               />
             </div>

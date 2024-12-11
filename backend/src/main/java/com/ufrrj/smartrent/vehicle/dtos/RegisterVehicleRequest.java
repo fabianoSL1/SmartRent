@@ -15,4 +15,6 @@ public class RegisterVehicleRequest {
     private String brand;
 
     private String color;
+
+    private String year;
 }

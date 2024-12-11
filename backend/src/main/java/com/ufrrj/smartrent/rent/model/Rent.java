@@ -6,8 +6,12 @@ import com.ufrrj.smartrent.payment.model.Charge;
 import jakarta.persistence.*;
 import lombok.Getter;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 @Getter
 @Entity()
@@ -33,6 +37,16 @@ public class Rent {
 
     @OneToMany
     private List<Charge> charges;
+
+    @Column(nullable = false)
+    private LocalDate dateBegin;
+
+    @Column(nullable = false)
+    private LocalDate dateEnd;
+
+    @CreationTimestamp
+    @Column(nullable = false)
+    private LocalDateTime registeredAt;
 
     public int getTotalAmount() {
         var amount = 0;

@@ -1,5 +1,7 @@
 package com.ufrrj.smartrent.payment.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.ufrrj.smartrent.payment.model.Charge;
@@ -14,4 +16,7 @@ public class ChargeService {
         return chargeRepository.save(charge);
     }
 
+    public List<Charge> chargesByRent(long rentId) {
+        return chargeRepository.findAllByRentId(rentId);
+    }
 }

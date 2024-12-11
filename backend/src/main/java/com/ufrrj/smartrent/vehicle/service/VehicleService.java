@@ -28,7 +28,7 @@ public class VehicleService {
         var vehicle = vehicleRepository.findById(id);
 
         if (vehicle.isEmpty()) {
-            throw new NotFoundException("Vehicle with id " + id + " not found");
+            throw new NotFoundException("Veiculo não encontrado");
         }
 
         return vehicle.get();
@@ -42,6 +42,8 @@ public class VehicleService {
                 .color(request.getColor())
                 .identifier(request.getIdentifier())
                 .model(request.getModel())
+                .year(request.getYear())
+                .status(VehicleStatus.AVAILABLE)
                 .owner(owner)
                 .build();
 
@@ -68,6 +70,9 @@ public class VehicleService {
         }
 
         vehicle.setStatus(status);
+
+        vehicleRepository.save(vehicle);
+        
         return vehicle;
     }
 }

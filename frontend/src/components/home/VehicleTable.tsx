@@ -17,39 +17,27 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { MoreHorizontal, Edit, Trash2 } from 'lucide-react'
+import { MoreHorizontal, Edit } from 'lucide-react'
+import { disableVehicle, enableVehicle, VehicleResponse } from "@/lib/vehicleService"
 
-interface Vehicle {
-  id: number
-  placa: string
-  modelo: string
-  ano: number
-  status: string
-}
-
-const initialVehicles: Vehicle[] = [
-  { id: 1, placa: "ABC-1234", modelo: "Toyota Corolla", ano: 2020, status: "Disponível" },
-  { id: 2, placa: "DEF-5678", modelo: "Honda Civic", ano: 2019, status: "Em uso" },
-  { id: 3, placa: "GHI-9012", modelo: "Ford Focus", ano: 2021, status: "Em manutenção" },
-]
-
-export function VehicleTable() {
-  const [vehicles, setVehicles] = useState<Vehicle[]>(initialVehicles)
+export function VehicleTable({ vehicles, updateVehicle }: { vehicles: VehicleResponse[], updateVehicle: (vehicle: VehicleResponse) => void }) {
   const [searchTerm, setSearchTerm] = useState("")
 
-  const filteredVehicles = vehicles.filter((vehicle) =>
-    Object.values(vehicle).some((value) =>
-      value.toString().toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredVehicles = vehicles.filter(({identifier, model, color, year}) =>
+    Object.values({identifier, model, color, year}).some((value) =>
+      value?.toString().toLowerCase().includes(searchTerm.toLowerCase())
     )
   )
 
-  const handleDelete = (id: number) => {
-    setVehicles(vehicles.filter((vehicle) => vehicle.id !== id))
-  }
+  const toogleAvailable = async (vehicle: VehicleResponse) => {
+    let response;
+    if (vehicle.status == "AVAILABLE") {
+      response = await disableVehicle(vehicle.id);
+    } else {
+      response = await enableVehicle(vehicle.id);
+    }
 
-  const handleEdit = (id: number) => {
-    // Implement edit functionality
-    console.log(`Edit vehicle with id: ${id}`)
+    updateVehicle(response);
   }
 
   return (
@@ -75,9 +63,9 @@ export function VehicleTable() {
         <TableBody>
           {filteredVehicles.map((vehicle) => (
             <TableRow key={vehicle.id} className="hover:bg-purple-50">
-              <TableCell>{vehicle.placa}</TableCell>
-              <TableCell>{vehicle.modelo}</TableCell>
-              <TableCell>{vehicle.ano}</TableCell>
+              <TableCell>{vehicle.identifier}</TableCell>
+              <TableCell>{vehicle.model}</TableCell>
+              <TableCell>{vehicle.year}</TableCell>
               <TableCell>{vehicle.status}</TableCell>
               <TableCell>
                 <DropdownMenu>
@@ -88,13 +76,9 @@ export function VehicleTable() {
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
-                    <DropdownMenuItem onClick={() => handleEdit(vehicle.id)}>
+                    <DropdownMenuItem onClick={() => toogleAvailable(vehicle)}>
                       <Edit className="mr-2 h-4 w-4" />
-                      <span>Editar</span>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => handleDelete(vehicle.id)}>
-                      <Trash2 className="mr-2 h-4 w-4" />
-                      <span>Excluir</span>
+                      <span>{vehicle.status != "AVAILABLE" ? "Habilitar" : "Desabilitar"}</span>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>

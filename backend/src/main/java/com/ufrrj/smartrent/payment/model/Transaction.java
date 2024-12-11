@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,13 +23,19 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
+    @Column(nullable = false)
     private boolean success;
 
+    @Column(nullable = false)
     private boolean retry;
 
+    @Column(nullable = false)
     private String message;
 
+    @Column(nullable = false)
     private String code;
 
+    @CreationTimestamp
+    @Column(nullable = false)
     private LocalDateTime timestamp;
 }

@@ -36,12 +36,16 @@ public class Vehicle {
     @Column(nullable = false)
     private String color;
 
+    @Column(nullable = false)
+    private String year;
+
     @CreationTimestamp
     @Column(nullable = false)
     private LocalDateTime registeredAt;
 
     @Setter
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private VehicleStatus status;
 
     public boolean isAvailable() {
