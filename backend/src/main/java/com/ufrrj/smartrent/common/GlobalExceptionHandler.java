@@ -22,28 +22,25 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleGenericException(Exception exception) {
         logging(exception);
-
         return new ResponseEntity<>("An error occurred", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(DomainException.class)
     public ResponseEntity<Map<String, String>> handleDomainException(RuntimeException exception) {
         logging(exception);
-
-        Map<String, String> response = new HashMap<>();
-        response.put("message", exception.getMessage());
-
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        return generateResponse(HttpStatus.BAD_REQUEST, exception.getMessage());
     }
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<Map<String, String>> handleNotFoundException(RuntimeException exception) {
         logging(exception);
+        return generateResponse(HttpStatus.NOT_FOUND, exception.getMessage());
+    }
 
+    private ResponseEntity<Map<String, String>> generateResponse(HttpStatus status, String message) {
         Map<String, String> response = new HashMap<>();
-        response.put("message", exception.getMessage());
-
-        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        response.put("message", message);
+        return new ResponseEntity<>(response, status);
     }
 
     private void logging(Exception exception) {
