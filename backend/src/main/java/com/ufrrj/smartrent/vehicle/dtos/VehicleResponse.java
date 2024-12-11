@@ -5,6 +5,8 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
+import com.ufrrj.smartrent.vehicle.enums.VehicleStatus;
+
 @Builder
 @Data
 public class VehicleResponse {
@@ -12,7 +14,7 @@ public class VehicleResponse {
 
     private long ownerId;
 
-    private boolean available;
+    private VehicleStatus status;
 
     private LocalDateTime createdAt;
 

@@ -2,6 +2,8 @@ package com.ufrrj.smartrent.vehicle.service;
 
 import com.ufrrj.smartrent.common.exception.NotFoundException;
 import com.ufrrj.smartrent.user.service.OwnerService;
+import com.ufrrj.smartrent.vehicle.dtos.RegisterVehicleRequest;
+import com.ufrrj.smartrent.vehicle.enums.VehicleStatus;
 import com.ufrrj.smartrent.vehicle.model.Vehicle;
 import com.ufrrj.smartrent.vehicle.repository.VehicleRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,22 +33,23 @@ public class VehicleService {
         return vehicle.get();
     }
 
-    public Vehicle saveVehicle(Vehicle vehicle) {
-        return vehicleRepository.save(vehicle);
-    }
-
-    public Vehicle createVehicle(String username) {
-        var owner = ownerService.findOwnerByUsername(username);
+    public Vehicle createVehicle(RegisterVehicleRequest request) {
+        var owner = ownerService.getCurrentOwner();
 
         var vehicle = Vehicle.builder()
-                .brand("toyota")
-                .color("red")
-                .identifier("TTY-8565")
-                .model("SUPRA 98")
+                .brand(request.getBrand())
+                .color(request.getColor())
+                .identifier(request.getIdentifier())
+                .model(request.getModel())
                 .owner(owner)
                 .build();
 
-        return this.saveVehicle(vehicle);
+        return vehicleRepository.save(vehicle);
     }
 
+    public Vehicle changeStatus(long id, VehicleStatus status) {
+        var vehicle = this.getVehicleById(id);
+        vehicle.setStatus(status);
+        return vehicle;
+    }
 }

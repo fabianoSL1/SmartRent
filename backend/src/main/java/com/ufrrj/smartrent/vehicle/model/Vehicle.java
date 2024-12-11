@@ -1,6 +1,8 @@
 package com.ufrrj.smartrent.vehicle.model;
 
 import com.ufrrj.smartrent.user.model.Owner;
+import com.ufrrj.smartrent.vehicle.enums.VehicleStatus;
+
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -40,6 +42,21 @@ public class Vehicle {
 
     @Setter
     @Column(nullable = false)
-    private boolean available;
+    private VehicleStatus status;
 
+    public boolean isAvailable() {
+        return this.status.equals(VehicleStatus.AVAILABLE);
+    }
+
+    public void turnAvaliable() {
+        this.status = VehicleStatus.AVAILABLE;
+    }
+
+    public void turnReserved() {
+        this.status = VehicleStatus.RESERVED;
+    }
+
+    public void turnInRent() {
+        this.status = VehicleStatus.IN_RENT;
+    }
 }

@@ -1,6 +1,5 @@
 package com.ufrrj.smartrent.rent.controller;
 
-import com.ufrrj.smartrent.common.security.AuthUtils;
 import com.ufrrj.smartrent.rent.dtos.CreateProposalRequest;
 import com.ufrrj.smartrent.rent.dtos.ProposalResponse;
 import com.ufrrj.smartrent.rent.model.Proposal;
@@ -18,33 +17,27 @@ public class ProposalController {
 
     @PostMapping
     public ResponseEntity<ProposalResponse> createProposal(@RequestBody CreateProposalRequest request) {
-        var username = AuthUtils.getCurrentAuthUsername();
-        var proposal = proposalService.createProposal(username, request.getVehicleId());
+        var proposal = proposalService.createProposal(request.getVehicleId());
 
         return ResponseEntity.status(201).body(createProposalResponse(proposal));
     }
 
     @PatchMapping("/{proposalId}/approve")
     public ResponseEntity<ProposalResponse> approveProposal(@PathVariable long proposalId) {
-        var username = AuthUtils.getCurrentAuthUsername();
-        var proposal = proposalService.approveProposal(username, proposalId);
+        var proposal = proposalService.approveProposal(proposalId);
 
         return ResponseEntity.ok(createProposalResponse(proposal));
     }
 
     @PatchMapping("/{proposalId}/reject")
     public ResponseEntity<ProposalResponse> rejectProposal(@PathVariable long proposalId) {
-        var username = AuthUtils.getCurrentAuthUsername();
-        var proposal = proposalService.rejectProposal(username, proposalId);
-
+        var proposal = proposalService.rejectProposal(proposalId);
         return ResponseEntity.ok(createProposalResponse(proposal));
     }
 
     @PatchMapping("/{proposalId}/cancel")
     public ResponseEntity<ProposalResponse> cancelProposal(@PathVariable long proposalId) {
-        var username = AuthUtils.getCurrentAuthUsername();
-        var proposal = proposalService.cancelProposal(username, proposalId);
-
+        var proposal = proposalService.cancelProposal(proposalId);
         return ResponseEntity.ok(createProposalResponse(proposal));
     }
 

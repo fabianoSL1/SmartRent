@@ -20,11 +20,10 @@ public class ProposalService {
 
     private final OwnerService ownerService;
 
-
-    public Proposal createProposal(String username, long vehicleId) {
+    public Proposal createProposal(long vehicleId) {
         var vehicle = vehicleService.getVehicleById(vehicleId);
 
-        var renter = renterService.findByUsername(username);
+        var renter = renterService.currentRenter();
 
         var proposal = renter.createProposal(vehicle);
 
@@ -32,10 +31,10 @@ public class ProposalService {
     }
 
 
-    public Proposal cancelProposal(String username, long proposalId) {
+    public Proposal cancelProposal(long proposalId) {
         var proposal = getProposal(proposalId);
 
-        var renter = renterService.findByUsername(username);
+        var renter = renterService.currentRenter();
 
         renter.cancelProposal(proposal);
 
@@ -43,20 +42,20 @@ public class ProposalService {
     }
 
 
-    public Proposal approveProposal(String username, long proposalId) {
+    public Proposal approveProposal(long proposalId) {
         var proposal = getProposal(proposalId);
 
-        var owner = ownerService.findOwnerByUsername(username);
+        var owner = ownerService.getCurrentOwner();
 
         owner.approveProposal(proposal);
 
         return proposalRepository.save(proposal);
     }
 
-    public Proposal rejectProposal(String username, long proposalId) {
+    public Proposal rejectProposal(long proposalId) {
         var proposal = getProposal(proposalId);
 
-        var owner = ownerService.findOwnerByUsername(username);
+        var owner = ownerService.getCurrentOwner();
 
         owner.rejectProposal(proposal);
 

@@ -46,7 +46,7 @@ public class Renter {
             throw new DomainException("Only renter can be cancelled");
         }
 
-        proposal.getVehicle().setAvailable(true);
+        proposal.getVehicle().turnAvaliable();
         proposal.setStatus(ProposalStatus.CANCELLED);
     }
 }
