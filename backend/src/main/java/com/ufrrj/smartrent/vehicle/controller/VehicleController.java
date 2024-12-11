@@ -39,11 +39,16 @@ public class VehicleController {
         return ResponseEntity.ok(response);
     }
 
-    @PatchMapping("{id}")
-    public ResponseEntity<VehicleResponse> changeVehicleStatus(
-            @PathVariable long id,
-            @RequestBody ChangeStatusRequest request) {
-        var vehicle = vehicleService.changeStatus(id, request.getStatus());
+    @PatchMapping("{id}/enable")
+    public ResponseEntity<VehicleResponse> enableVehicle(@PathVariable long id) {
+        var vehicle = vehicleService.enableVehicle(id);
+        var response = createVehicleResponse(vehicle);
+        return ResponseEntity.ok(response);
+    }
+    
+    @PatchMapping("{id}/disable")
+    public ResponseEntity<VehicleResponse> disableVehicle(@PathVariable long id) {
+        var vehicle = vehicleService.disableVehicle(id);
         var response = createVehicleResponse(vehicle);
         return ResponseEntity.ok(response);
     }

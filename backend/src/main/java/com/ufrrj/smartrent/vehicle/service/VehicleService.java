@@ -1,5 +1,6 @@
 package com.ufrrj.smartrent.vehicle.service;
 
+import com.ufrrj.smartrent.common.exception.DomainException;
 import com.ufrrj.smartrent.common.exception.NotFoundException;
 import com.ufrrj.smartrent.user.service.OwnerService;
 import com.ufrrj.smartrent.vehicle.dtos.RegisterVehicleRequest;
@@ -47,8 +48,25 @@ public class VehicleService {
         return vehicleRepository.save(vehicle);
     }
 
+
+    public Vehicle disableVehicle(long id) {
+        return changeStatus(id, VehicleStatus.UNAVAILABLE);
+    }
+
+    public Vehicle enableVehicle(long id) {
+        return changeStatus(id, VehicleStatus.AVAILABLE);
+    }
+
     public Vehicle changeStatus(long id, VehicleStatus status) {
+        var owner = ownerService.getCurrentOwner();
+
+
         var vehicle = this.getVehicleById(id);
+        
+        if (vehicle.getOwner().getId() != owner.getId()) {
+            throw new DomainException("apenas o proprietario pode realizar está ação");
+        }
+
         vehicle.setStatus(status);
         return vehicle;
     }
