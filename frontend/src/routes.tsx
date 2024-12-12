@@ -2,9 +2,10 @@ import { Route, Routes } from "react-router";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Home from "./pages/Home";
-import Proposal from "./pages/Proposal";
+import ProposalReceived from "./pages/ProposalsReceived";
 import Available from "./pages/Available";
 import PrivateRouter from "./components/PrivateRouter";
+import ProposalSend from "./pages/ProposalsSend";
 
 
 
@@ -26,7 +27,12 @@ export default function AppRoutes() {
             } />
             <Route path="/propostas/recebidas" element={
                 <PrivateRouter>
-                    <Proposal />
+                    <ProposalReceived />
+                </PrivateRouter>
+            } />
+            <Route path="/propostas/enviadas" element={
+                <PrivateRouter>
+                    <ProposalSend />
                 </PrivateRouter>
             } />
         </Routes>

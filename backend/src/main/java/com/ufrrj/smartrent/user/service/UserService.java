@@ -1,6 +1,8 @@
 package com.ufrrj.smartrent.user.service;
 
+import com.ufrrj.smartrent.common.exception.DomainException;
 import com.ufrrj.smartrent.common.exception.NotFoundException;
+import com.ufrrj.smartrent.user.dtos.RegisterRequest;
 import com.ufrrj.smartrent.user.model.Owner;
 import com.ufrrj.smartrent.user.model.Renter;
 import com.ufrrj.smartrent.user.model.User;
@@ -41,17 +43,18 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional()
-    public User saveUser(String username, String password) throws Error {
-        var exist = userRepository.findByUsername(username);
+    public User saveUser(RegisterRequest request) throws Error {
+        var exist = userRepository.findByUsername(request.getUsername());
 
         if (exist.isPresent()) {
-            throw new NotFoundException("Username " + username + " already exists");
+            throw new DomainException("Usuario já existe");
         }
 
-        var encrypt = new BCryptPasswordEncoder().encode(password);
+        var encrypt = new BCryptPasswordEncoder().encode(request.getPassword());
 
         var user = User.builder()
-                .username(username)
+                .username(request.getUsername())
+                .name(request.getName())
                 .password(encrypt)
                 .build();
 

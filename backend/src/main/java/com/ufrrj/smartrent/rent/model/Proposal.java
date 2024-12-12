@@ -6,6 +6,8 @@ import com.ufrrj.smartrent.vehicle.model.Vehicle;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+
 @Builder
 @Getter
 @NoArgsConstructor
@@ -18,14 +20,24 @@ public class Proposal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     private Renter renter;
 
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     private Vehicle vehicle;
 
+    @Setter
+    @Column(nullable = false)
     private int amount;
-    
+
+    @Setter
+    @Column(nullable = false)
+    private LocalDate beginDate;
+
+    @Setter
+    @Column(nullable = false)
+    private LocalDate endDate;
+
     @Setter
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)

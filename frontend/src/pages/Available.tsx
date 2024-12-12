@@ -12,7 +12,7 @@ export default function Available() {
 
   return (
     <Layout>
-      <h1 className="mb-4 text-2xl font-bold text-purple-700">Gerenciamento de Veículos</h1>
+      <h1 className="mb-4 text-2xl font-bold text-purple-700">Veículos disponiveis</h1>
       <div className="rounded-lg bg-white p-6 shadow-md">
 
         {vehicles.length > 0 ?

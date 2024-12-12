@@ -7,29 +7,18 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { MoreHorizontal, Plus } from 'lucide-react'
 import { VehicleResponse } from "@/lib/vehicleService"
+import { VehicleProposalModal } from "../proposalReceive/VehicleProposalModal"
 
-export function VehicleTable({ vehicles }: { vehicles: VehicleResponse[]}) {
+export function VehicleTable({ vehicles }: { vehicles: VehicleResponse[] }) {
   const [searchTerm, setSearchTerm] = useState("")
 
-  const filteredVehicles = vehicles.filter(({identifier, model, color, year}) =>
-    Object.values({identifier, model, color, year}).some((value) =>
+  const filteredVehicles = vehicles.filter(({ identifier, model, color, year }) =>
+    Object.values({ identifier, model, color, year }).some((value) =>
       value?.toString().toLowerCase().includes(searchTerm.toLowerCase())
     )
   )
-
-  async function createProposal(vehicle: VehicleResponse) {
-    console.log(vehicle)
-  }
 
   return (
     <div>
@@ -47,7 +36,7 @@ export function VehicleTable({ vehicles }: { vehicles: VehicleResponse[]}) {
             <TableHead className="text-purple-700">Placa</TableHead>
             <TableHead className="text-purple-700">Modelo</TableHead>
             <TableHead className="text-purple-700">Ano</TableHead>
-            <TableHead className="text-purple-700">Ações</TableHead>
+            <TableHead className="text-purple-700"></TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -57,20 +46,7 @@ export function VehicleTable({ vehicles }: { vehicles: VehicleResponse[]}) {
               <TableCell>{vehicle.model}</TableCell>
               <TableCell>{vehicle.year}</TableCell>
               <TableCell>
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="h-8 w-8 p-0">
-                      <span className="sr-only">Abrir menu</span>
-                      <MoreHorizontal className="h-4 w-4" />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuItem onClick={() => createProposal(vehicle)}>
-                      <Plus className="mr-2 h-4 w-4" />
-                      <span>Criar proposta</span>
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
+                <VehicleProposalModal vehicleId={vehicle.id} />
               </TableCell>
             </TableRow>
           ))}

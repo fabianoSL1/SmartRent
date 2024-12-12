@@ -4,6 +4,7 @@ import com.ufrrj.smartrent.payment.enums.ChargeStatus;
 import com.ufrrj.smartrent.rent.enums.RentStatus;
 import com.ufrrj.smartrent.payment.model.Charge;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.time.LocalDate;
@@ -11,17 +12,22 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 @Getter
 @Entity()
 @Table(name = "rents")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Rent {
 
     public Rent(Proposal proposal) {
         this.proposal = proposal;
         this.charges = new ArrayList<>();
         this.status = RentStatus.PENDING_PAYMENT;
+        this.dateBegin = proposal.getBeginDate();
+        this.dateEnd = proposal.getEndDate();
     }
 
     @Id

@@ -98,15 +98,9 @@ function SidebarContent() {
               </Button>
             </CollapsibleContent>
           </Collapsible>
-          
-          <Button variant="ghost" className="w-full justify-start hover:bg-purple-100 hover:text-purple-700" asChild>
-            <NavLink to="/alugueis">
-              <Settings className="mr-2 h-4 w-4" />
-              Alugueis
-            </NavLink>
-          </Button>
         </div>
       </div>
+      
       <div className="absolute bottom-4 left-0 right-0 px-3">
         <Button onClick={logout} variant="ghost" className="w-full justify-start text-red-500 hover:bg-red-100 hover:text-red-700">
           <LogOut className="mr-2 h-4 w-4" />

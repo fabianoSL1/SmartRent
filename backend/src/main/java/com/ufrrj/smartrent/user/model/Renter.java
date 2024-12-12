@@ -1,6 +1,7 @@
 package com.ufrrj.smartrent.user.model;
 
 import com.ufrrj.smartrent.common.exception.DomainException;
+import com.ufrrj.smartrent.rent.dtos.CreateProposalRequest;
 import com.ufrrj.smartrent.rent.enums.ProposalStatus;
 import com.ufrrj.smartrent.rent.model.Proposal;
 import com.ufrrj.smartrent.vehicle.model.Vehicle;
@@ -25,25 +26,32 @@ public class Renter {
     @OneToOne(optional = false)
     private User user;
 
-    public Proposal createProposal(Vehicle vehicle) {
+    public Proposal createProposal(Vehicle vehicle, CreateProposalRequest request) {
         if (vehicle.getOwner().getUser().getId() == this.user.getId()) {
-            throw new DomainException("Owner cannot be renter");
+            throw new DomainException("Proprietarios não podem alugar seus veiculos.");
         }
 
         if (!vehicle.isAvailable()) {
-            throw new DomainException("Vehicle is not available");
+            throw new DomainException("Veiculo não está disponivel.");
+        }
+
+        if (request.getBeginDate().isAfter(request.getEndDate())) {
+            throw new DomainException("A data de inicio não pode ser depois da data final.");
         }
 
         return Proposal.builder()
                 .renter(this)
+                .amount(request.getAmount())
                 .vehicle(vehicle)
                 .status(ProposalStatus.PENDING)
+                .beginDate(request.getBeginDate())
+                .endDate(request.getEndDate())
                 .build();
     }
 
     public void cancelProposal(Proposal proposal) {
         if (proposal.getRenter().id != this.id) {
-            throw new DomainException("Only renter can be cancelled");
+            throw new DomainException("Apenas o solicitante pode cancelar a proposta.");
         }
 
         proposal.getVehicle().turnAvailable();

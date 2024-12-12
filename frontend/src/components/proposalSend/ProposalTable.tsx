@@ -13,32 +13,24 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { MoreHorizontal, Check, X } from 'lucide-react'
-
-interface Proposal {
-  id: number
-  vehiclePlate: string
-  proposerName: string
-  amount: number
-  date: string
-  status: 'Pendente' | 'Aceita' | 'Recusada'
-}
+import { MoreHorizontal, Check } from 'lucide-react'
+import { ProposalResponse } from "@/lib/proposalService"
 
 interface ProposalsTableProps {
-  proposals: Proposal[]
-  onAccept: (id: number) => void
-  onReject: (id: number) => void
+  proposals: ProposalResponse[]
+  onCancel: (id: number) => void,
+  onGenerateRent: (id: number) => void
 }
 
-export function ProposalsTable({ proposals, onAccept, onReject }: ProposalsTableProps) {
+export function ProposalsTable({ proposals, onCancel, onGenerateRent }: ProposalsTableProps) {
   return (
     <Table>
       <TableHeader>
         <TableRow className="bg-purple-50">
           <TableHead className="text-purple-700">Placa do Veículo</TableHead>
-          <TableHead className="text-purple-700">Proponente</TableHead>
           <TableHead className="text-purple-700">Valor</TableHead>
-          <TableHead className="text-purple-700">Data</TableHead>
+          <TableHead className="text-purple-700">Inicio</TableHead>
+          <TableHead className="text-purple-700">Fim</TableHead>
           <TableHead className="text-purple-700">Status</TableHead>
           <TableHead className="text-purple-700">Ações</TableHead>
         </TableRow>
@@ -46,18 +38,12 @@ export function ProposalsTable({ proposals, onAccept, onReject }: ProposalsTable
       <TableBody>
         {proposals.map((proposal) => (
           <TableRow key={proposal.id} className="hover:bg-purple-50">
-            <TableCell>{proposal.vehiclePlate}</TableCell>
-            <TableCell>{proposal.proposerName}</TableCell>
-            <TableCell>R$ {proposal.amount.toLocaleString('pt-BR')}</TableCell>
-            <TableCell>{new Date(proposal.date).toLocaleDateString('pt-BR')}</TableCell>
+            <TableCell>{proposal.vehicleIdentifier}</TableCell>
+            <TableCell>{(proposal.amount / 100).toLocaleString('pt-BR', { style: "currency", currency: "BRL" })}</TableCell>
+            <TableCell>{new Date(proposal.beginDate).toLocaleDateString('pt-BR')}</TableCell>
+            <TableCell>{new Date(proposal.endDate).toLocaleDateString('pt-BR')}</TableCell>
             <TableCell>
-              <span className={`inline-block rounded-full px-2 py-1 text-xs font-semibold ${
-                proposal.status === 'Pendente' ? 'bg-yellow-200 text-yellow-800' :
-                proposal.status === 'Aceita' ? 'bg-green-200 text-green-800' :
-                'bg-red-200 text-red-800'
-              }`}>
-                {proposal.status}
-              </span>
+              {proposal.status}
             </TableCell>
             <TableCell>
               <DropdownMenu>
@@ -68,13 +54,13 @@ export function ProposalsTable({ proposals, onAccept, onReject }: ProposalsTable
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
-                  <DropdownMenuItem onClick={() => onAccept(proposal.id)} disabled={proposal.status !== 'Pendente'}>
+                  <DropdownMenuItem onClick={() => onCancel(proposal.id)} disabled={!['PENDING', 'APPROVED'].includes(proposal.status)}>
                     <Check className="mr-2 h-4 w-4 text-green-600" />
-                    <span>Aceitar</span>
+                    <span>Cancelar</span>
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => onReject(proposal.id)} disabled={proposal.status !== 'Pendente'}>
-                    <X className="mr-2 h-4 w-4 text-red-600" />
-                    <span>Recusar</span>
+                  <DropdownMenuItem onClick={() => onGenerateRent(proposal.id)}>
+                    <Check className="mr-2 h-4 w-4 text-green-600" />
+                    <span>Gerar aluguel</span>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>

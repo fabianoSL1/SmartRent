@@ -17,7 +17,7 @@ public class RenterService {
 
     private final UserRepository userRepository;
 
-    public Renter currentRenter() {
+    public Renter getCurrentRenter() {
         var username = AuthUtils.getCurrentAuthUsername();
 
         var exist = renterRepository.findOwnerByUserUsername(username);

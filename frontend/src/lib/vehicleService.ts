@@ -1,4 +1,5 @@
 import { callGet, callPatch, callPost } from "./api";
+import { alertMessage } from "./alert";
 
 export type RegisterVehicleRequest = {
     identifier: string;
@@ -21,21 +22,36 @@ export type VehicleResponse = {
 }
 
 export async function registerVehicle(body: RegisterVehicleRequest) {
-    return await callPost<VehicleResponse>("/vehicles", body, true);
+    return alertMessage(
+        async () => await callPost<VehicleResponse>("/vehicles", body, true),
+        "Falha ao cadastrar veiculo"
+    );
 }
 
 export async function listVehiclesCurrentOwner() {
-    return await callGet<VehicleResponse[]>("/vehicles/list/owner", true);
+    return alertMessage(
+        async () => await callGet<VehicleResponse[]>("/vehicles/list/owner", true),
+        "Falha ao listar veiculos"
+    );
 }
 
 export async function listVehiclesAvailables() {
-    return await callGet<VehicleResponse[]>("/vehicles/list/available", true);
+    return alertMessage(
+        async () => await callGet<VehicleResponse[]>("/vehicles/list/available", true),
+        "Falha ao listar veiculos disponiveis"
+    );
 }
 
 export async function enableVehicle(vehicleId: number) {
-    return await callPatch<VehicleResponse>(`/vehicles/${vehicleId}/enable`, {}, true);
+    return alertMessage(
+        async () => await callPatch<VehicleResponse>(`/vehicles/${vehicleId}/enable`, {}, true),
+        "Falha ao habilitar veiculo"
+    );
 }
 
 export async function disableVehicle(vehicleId: number) {
-    return await callPatch<VehicleResponse>(`/vehicles/${vehicleId}/disable`, {}, true);
+    return alertMessage(
+        async () => await callPatch<VehicleResponse>(`/vehicles/${vehicleId}/disable`, {}, true),
+        "Falha ao desabilitar veiculo"
+    );
 }

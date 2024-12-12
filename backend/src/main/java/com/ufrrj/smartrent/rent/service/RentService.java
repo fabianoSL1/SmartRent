@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import com.ufrrj.smartrent.rent.enums.ProposalStatus;
+import com.ufrrj.smartrent.vehicle.service.VehicleService;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import com.ufrrj.smartrent.common.exception.DomainException;
@@ -24,13 +27,23 @@ public class RentService {
 
     private final RentRepository rentRepository;
 
+    private final VehicleService vehicleService;
+
+
+    @Transactional
     public Rent createRent(Proposal proposal) {
+        if (!proposal.getStatus().equals(ProposalStatus.APPROVED)) {
+            throw new DomainException("Proposta não foi aprovada.");
+        }
+
         var rent = new Rent(proposal);
         var charge = new Charge(rent);
 
+        rentRepository.save(rent);
+
         chargeService.saveCharge(charge);
 
-        rentRepository.save(rent);
+        vehicleService.reserveVehicle(proposal.getVehicle());
 
         return rent;
     }

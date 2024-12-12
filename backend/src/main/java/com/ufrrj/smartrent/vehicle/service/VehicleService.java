@@ -20,10 +20,6 @@ public class VehicleService {
 
     private final OwnerService ownerService;
 
-    public List<Vehicle> getAllVehicles() {
-        return vehicleRepository.findAll();
-    }
-
     public List<Vehicle> getVehiclesByOwner() {
         var owner = ownerService.getCurrentOwner();
         return vehicleRepository.getVehicleByOwnerId(owner.getId());
@@ -60,7 +56,6 @@ public class VehicleService {
         return vehicleRepository.save(vehicle);
     }
 
-
     public Vehicle disableVehicle(long id) {
         return changeStatus(id, VehicleStatus.UNAVAILABLE);
     }
@@ -84,5 +79,10 @@ public class VehicleService {
         vehicleRepository.save(vehicle);
         
         return vehicle;
+    }
+
+    public void reserveVehicle(Vehicle vehicle) {
+        vehicle.setStatus(VehicleStatus.RESERVED);
+        vehicleRepository.save(vehicle);
     }
 }

@@ -38,10 +38,7 @@ public class AuthController {
 
     @PostMapping("register")
     public ResponseEntity<RegisterResponse> register(@RequestBody RegisterRequest registerRequest) {
-        var user = userService.saveUser(
-                registerRequest.getUsername(),
-                registerRequest.getPassword()
-        );
+        var user = userService.saveUser(registerRequest);
 
         var response = RegisterResponse.builder()
                 .id(user.getId())

@@ -18,7 +18,8 @@ export default function RegistrationForm() {
 
     await register({
       username,
-      password
+      password,
+      name
     })
     
     navigate("/login")

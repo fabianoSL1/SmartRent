@@ -8,7 +8,8 @@ type LoginRequest = {
 
 type RegisterRequest = {
     username: string,
-    password: string
+    password: string,
+    name: string
 }
 
 type LoginResponse = {
