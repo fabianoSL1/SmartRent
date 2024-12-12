@@ -52,7 +52,7 @@ public class Vehicle {
         return this.status.equals(VehicleStatus.AVAILABLE);
     }
 
-    public void turnAvaliable() {
+    public void turnAvailable() {
         this.status = VehicleStatus.AVAILABLE;
     }
 

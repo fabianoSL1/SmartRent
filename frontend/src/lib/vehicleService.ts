@@ -24,8 +24,12 @@ export async function registerVehicle(body: RegisterVehicleRequest) {
     return await callPost<VehicleResponse>("/vehicles", body, true);
 }
 
-export async function listVehicles() {
-    return await callGet<VehicleResponse[]>("/vehicles", true);
+export async function listVehiclesCurrentOwner() {
+    return await callGet<VehicleResponse[]>("/vehicles/list/owner", true);
+}
+
+export async function listVehiclesAvailables() {
+    return await callGet<VehicleResponse[]>("/vehicles/list/available", true);
 }
 
 export async function enableVehicle(vehicleId: number) {

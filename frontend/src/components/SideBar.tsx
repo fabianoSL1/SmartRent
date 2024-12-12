@@ -36,6 +36,7 @@ export function Sidebar({ open, setOpen }: SidebarProps) {
 
 function SidebarContent() {
   const [proposalsOpen, setProposalsOpen] = useState(false)
+  const [vehiclesOpen, setVehiclesOpen] = useState(false)
 
   return (
     <ScrollArea className="h-full py-6">
@@ -44,12 +45,30 @@ function SidebarContent() {
         
 
         <div className="space-y-1">
-          <Button variant="ghost" className="w-full justify-start hover:bg-purple-100 hover:text-purple-700" asChild>
-            <NavLink to="/">
-              <Car className="mr-2 h-4 w-4" />
-              Veículos
-            </NavLink>
-          </Button>
+        <Collapsible open={vehiclesOpen} onOpenChange={setVehiclesOpen}>
+            <CollapsibleTrigger asChild>
+              <Button variant="ghost" className="w-full justify-between hover:bg-purple-100 hover:text-purple-700">
+                <div className="flex items-center">
+                  <Car className="mr-2 h-4 w-4" />
+                  Veículos
+                </div>
+                <ChevronDown className={`h-4 w-4 transition-transform ${vehiclesOpen ? "rotate-180" : ""}`} />
+              </Button>
+            </CollapsibleTrigger>
+            <CollapsibleContent className="space-y-1 px-4 py-2">
+              <Button variant="ghost" className="w-full justify-start hover:bg-purple-100 hover:text-purple-700" asChild>
+                <NavLink to="/">
+                  Meus veiculos
+                </NavLink>
+              </Button>
+              <Button variant="ghost" className="w-full justify-start hover:bg-purple-100 hover:text-purple-700" asChild>
+                <NavLink to="/disponiveis">
+                  disponiveis
+                </NavLink>
+              </Button>
+            </CollapsibleContent>
+          </Collapsible>
+          
           <Collapsible open={proposalsOpen} onOpenChange={setProposalsOpen}>
             <CollapsibleTrigger asChild>
               <Button variant="ghost" className="w-full justify-between hover:bg-purple-100 hover:text-purple-700">
@@ -73,6 +92,7 @@ function SidebarContent() {
               </Button>
             </CollapsibleContent>
           </Collapsible>
+          
           <Button variant="ghost" className="w-full justify-start hover:bg-purple-100 hover:text-purple-700" asChild>
             <NavLink to="/alugueis">
               <Settings className="mr-2 h-4 w-4" />

@@ -1,5 +1,3 @@
-"use client"
-
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import {
@@ -50,7 +48,7 @@ export default function RegisterVehicle() {
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-                <Button variant="ghost" className="justify-start hover:bg-purple-100 hover:text-purple-700" >
+                <Button variant="ghost" className="justify-start hover:bg-purple-100 hover:text-purple-700 mb-2" >
                     <Plus className="h-4 w-4" />
                     Registrar Veículo
                 </Button>

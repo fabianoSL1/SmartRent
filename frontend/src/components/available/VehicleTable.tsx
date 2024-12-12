@@ -15,17 +15,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { MoreHorizontal, Edit } from 'lucide-react'
-import { disableVehicle, enableVehicle, VehicleResponse } from "@/lib/vehicleService"
+import { MoreHorizontal, Plus } from 'lucide-react'
+import { VehicleResponse } from "@/lib/vehicleService"
 
-const labels = {
-  "AVAILABLE": "Disponivel",
-  "UNAVAILABLE": "Indisponivel",
-  "IN_RENT": "Alugado",
-  "RESERVED": "Reservado"
-}
-
-export function VehicleTable({ vehicles, updateVehicle }: { vehicles: VehicleResponse[], updateVehicle: (vehicle: VehicleResponse) => void }) {
+export function VehicleTable({ vehicles }: { vehicles: VehicleResponse[]}) {
   const [searchTerm, setSearchTerm] = useState("")
 
   const filteredVehicles = vehicles.filter(({identifier, model, color, year}) =>
@@ -34,15 +27,8 @@ export function VehicleTable({ vehicles, updateVehicle }: { vehicles: VehicleRes
     )
   )
 
-  const toogleAvailable = async (vehicle: VehicleResponse) => {
-    let response;
-    if (vehicle.status == "AVAILABLE") {
-      response = await disableVehicle(vehicle.id);
-    } else {
-      response = await enableVehicle(vehicle.id);
-    }
-
-    updateVehicle(response);
+  async function createProposal(vehicle: VehicleResponse) {
+    console.log(vehicle)
   }
 
   return (
@@ -61,7 +47,6 @@ export function VehicleTable({ vehicles, updateVehicle }: { vehicles: VehicleRes
             <TableHead className="text-purple-700">Placa</TableHead>
             <TableHead className="text-purple-700">Modelo</TableHead>
             <TableHead className="text-purple-700">Ano</TableHead>
-            <TableHead className="text-purple-700">Status</TableHead>
             <TableHead className="text-purple-700">Ações</TableHead>
           </TableRow>
         </TableHeader>
@@ -71,7 +56,6 @@ export function VehicleTable({ vehicles, updateVehicle }: { vehicles: VehicleRes
               <TableCell>{vehicle.identifier}</TableCell>
               <TableCell>{vehicle.model}</TableCell>
               <TableCell>{vehicle.year}</TableCell>
-              <TableCell>{labels[vehicle.status as keyof typeof labels]}</TableCell>
               <TableCell>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
@@ -81,9 +65,9 @@ export function VehicleTable({ vehicles, updateVehicle }: { vehicles: VehicleRes
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
-                    <DropdownMenuItem onClick={() => toogleAvailable(vehicle)}>
-                      <Edit className="mr-2 h-4 w-4" />
-                      <span>{vehicle.status != "AVAILABLE" ? "Habilitar" : "Desabilitar"}</span>
+                    <DropdownMenuItem onClick={() => createProposal(vehicle)}>
+                      <Plus className="mr-2 h-4 w-4" />
+                      <span>Criar proposta</span>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>

@@ -25,13 +25,25 @@ public class VehicleController {
         return ResponseEntity.status(201).body(response);
     }
 
-    @GetMapping
-    public ResponseEntity<List<VehicleResponse>> getAllVehicles() {
-        var vehicles = vehicleService.getAllVehicles();
+    @GetMapping("/list/owner")
+    public ResponseEntity<List<VehicleResponse>> getOwnedVehicles() {
+        var vehicles = vehicleService.getVehiclesByOwner();
 
         var response = vehicles
                 .stream()
-                .map(vehicle -> new VehicleResponse(vehicle))
+                .map(VehicleResponse::new)
+                .toList();
+
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/list/available")
+    public ResponseEntity<List<VehicleResponse>> getAvailableVehicles() {
+        var vehicles = vehicleService.getAvailableVehicles();
+
+        var response = vehicles
+                .stream()
+                .map(VehicleResponse::new)
                 .toList();
 
         return ResponseEntity.ok(response);

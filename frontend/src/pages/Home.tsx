@@ -1,14 +1,14 @@
 import { Layout } from "@/components/Layout"
 import RegisterVehicle from "@/components/home/RegisterVehicle";
 import { VehicleTable } from "@/components/home/VehicleTable"
-import { listVehicles, VehicleResponse } from "@/lib/vehicleService"
+import { listVehiclesCurrentOwner, VehicleResponse } from "@/lib/vehicleService"
 import { useEffect, useState } from "react"
 
-export function Home() {
+export default function Home() {
   const [vehicles, setVehicles] = useState<VehicleResponse[]>([]);
 
   useEffect(() => {
-    listVehicles().then(vehiclesResponse => setVehicles(vehiclesResponse))
+    listVehiclesCurrentOwner().then(vehiclesResponse => setVehicles(vehiclesResponse))
   }, [])
 
   function updateVehicle(vehicle: VehicleResponse) {
@@ -29,7 +29,7 @@ export function Home() {
 
         {vehicles.length > 0 ?
           <VehicleTable vehicles={vehicles} updateVehicle={updateVehicle} />
-          : <p className="text-center text-muted-foreground">Nenhum veículo disponivel no momento.</p>}
+          : <p className="text-center text-muted-foreground">Nenhum veículo registrado.</p>}
       </div>
     </Layout>
   )

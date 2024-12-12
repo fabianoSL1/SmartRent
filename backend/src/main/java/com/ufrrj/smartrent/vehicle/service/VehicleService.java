@@ -24,6 +24,16 @@ public class VehicleService {
         return vehicleRepository.findAll();
     }
 
+    public List<Vehicle> getVehiclesByOwner() {
+        var owner = ownerService.getCurrentOwner();
+        return vehicleRepository.getVehicleByOwnerId(owner.getId());
+    }
+
+    public List<Vehicle> getAvailableVehicles() {
+        var owner = ownerService.getCurrentOwner();
+        return vehicleRepository.getAvailableVehicles(owner.getId());
+    }
+
     public Vehicle getVehicleById(long id) {
         var vehicle = vehicleRepository.findById(id);
 
