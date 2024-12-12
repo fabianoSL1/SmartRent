@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/collapsible"
 import { Menu, Car, Settings, LogOut, FileText, ChevronDown } from 'lucide-react'
 import { useState } from "react"
-import { NavLink } from "react-router"
+import { NavLink, useNavigate } from "react-router"
 
 interface SidebarProps {
   open: boolean
@@ -37,7 +37,13 @@ export function Sidebar({ open, setOpen }: SidebarProps) {
 function SidebarContent() {
   const [proposalsOpen, setProposalsOpen] = useState(false)
   const [vehiclesOpen, setVehiclesOpen] = useState(false)
+  const navigate = useNavigate();
 
+  function logout() {
+    sessionStorage.removeItem("token");
+    navigate("/login")
+  }
+  
   return (
     <ScrollArea className="h-full py-6">
       <div className="px-3 py-2">
@@ -102,7 +108,7 @@ function SidebarContent() {
         </div>
       </div>
       <div className="absolute bottom-4 left-0 right-0 px-3">
-        <Button variant="ghost" className="w-full justify-start text-red-500 hover:bg-red-100 hover:text-red-700">
+        <Button onClick={logout} variant="ghost" className="w-full justify-start text-red-500 hover:bg-red-100 hover:text-red-700">
           <LogOut className="mr-2 h-4 w-4" />
           Sair
         </Button>

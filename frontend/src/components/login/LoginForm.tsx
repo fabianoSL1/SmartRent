@@ -6,14 +6,17 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { login } from "@/lib/authService"
+import { NavLink, useNavigate } from "react-router"
 
 export default function LoginForm() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    await login({username, password})
+    await login({ username, password })
+    navigate("/")
   }
 
   return (
@@ -49,10 +52,15 @@ export default function LoginForm() {
             </div>
           </div>
         </CardContent>
-        <CardFooter>
+        <CardFooter className="flex flex-col gap-4">
           <Button type="submit" className="w-full">Entrar</Button>
+          <NavLink to="/cadastro">
+            <a className="text-gray-600 hover:text-purple-700 font-medium">Realizar cadastro</a>
+          </NavLink>
         </CardFooter>
+
       </form>
+
     </Card>
   )
 }

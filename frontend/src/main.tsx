@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import AppRoutes from './routes.tsx'
 import { BrowserRouter } from 'react-router'
+import { Toaster } from './components/ui/toaster.tsx'
 
 
 createRoot(document.getElementById('root')!).render(
@@ -10,5 +11,6 @@ createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <AppRoutes />
     </BrowserRouter>
+    <Toaster />
   </StrictMode>,
 )

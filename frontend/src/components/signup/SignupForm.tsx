@@ -4,27 +4,33 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { register } from "@/lib/authService"
+import { NavLink, useNavigate } from "react-router"
 
 export default function RegistrationForm() {
   const [name, setName] = useState("")
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const navigate = useNavigate()
+  
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    register({
+    await register({
       username,
       password
     })
+    
+    navigate("/login")
   }
 
   return (
     <Card className="w-[350px]">
       <CardHeader>
         <CardTitle>Cadastro</CardTitle>
-        <CardDescription>Crie sua conta para começar</CardDescription>
+        <CardDescription>Crie sua conta ou faça <NavLink to="/login">
+          <a className="text-purple-700 font-medium">login</a>
+        </NavLink>.</CardDescription>
       </CardHeader>
       <form onSubmit={handleSubmit}>
         <CardContent>

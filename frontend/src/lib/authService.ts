@@ -1,3 +1,4 @@
+import { toast } from "@/hooks/use-toast";
 import { callPost } from "./api";
 
 type LoginRequest = {
@@ -15,10 +16,31 @@ type LoginResponse = {
 }
 
 export async function login(body: LoginRequest) {
-    const response = await callPost<LoginResponse>("/auth/login", body, false);
-    sessionStorage.setItem("token", response.token);
+    try {
+        const response = await callPost<LoginResponse>("/auth/login", body, false);
+        sessionStorage.setItem("token", response.token);
+    } catch (err) {
+        if (err instanceof Error) {
+            toast({
+                title: "Falha ao realizar login",
+            })
+        }
+
+        throw err
+    }
 }
 
 export async function register(body: RegisterRequest) {
-    await callPost("/auth/register", body, false);
+    try {
+        await callPost("/auth/register", body, false);
+    } catch (err) {
+        if (err instanceof Error) {
+            toast({
+                title: "Falha ao realizar login",
+                description: err.message
+            })
+        }
+
+        throw err
+    }
 }
