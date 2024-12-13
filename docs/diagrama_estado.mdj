@@ -481,7 +481,7 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"parentStyle": true,
-											"left": -64,
+											"left": 32,
 											"top": -16,
 											"height": 13
 										},
@@ -493,7 +493,7 @@
 											},
 											"font": "Arial;13;1",
 											"parentStyle": true,
-											"left": 253,
+											"left": 301,
 											"top": 399,
 											"width": 67.47900390625,
 											"height": 13,
@@ -508,7 +508,7 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"parentStyle": true,
-											"left": -64,
+											"left": 32,
 											"top": -16,
 											"width": 38.27001953125,
 											"height": 13,
@@ -523,7 +523,7 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"parentStyle": true,
-											"left": -64,
+											"left": 32,
 											"top": -16,
 											"height": 13,
 											"horizontalAlignment": 1
@@ -531,7 +531,7 @@
 									],
 									"font": "Arial;13;0",
 									"parentStyle": true,
-									"left": 248,
+									"left": 296,
 									"top": 392,
 									"width": 77.47900390625,
 									"height": 25,
@@ -560,7 +560,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"parentStyle": true,
-									"left": -32,
+									"left": 16,
 									"top": -8,
 									"width": 10,
 									"height": 10
@@ -577,7 +577,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"parentStyle": true,
-									"left": -32,
+									"left": 16,
 									"top": -8,
 									"width": 10,
 									"height": 10
@@ -593,7 +593,7 @@
 									},
 									"font": "Arial;13;0",
 									"parentStyle": true,
-									"left": 248,
+									"left": 296,
 									"top": 417,
 									"width": 77.47900390625
 								}
@@ -601,7 +601,7 @@
 							"font": "Arial;13;0",
 							"parentStyle": false,
 							"containerChangeable": true,
-							"left": 248,
+							"left": 296,
 							"top": 392,
 							"width": 76.47900390625,
 							"height": 40,
@@ -903,17 +903,17 @@
 									},
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 216,
-									"top": 332,
+									"left": 168,
+									"top": 359,
 									"width": 137.29345703125,
 									"height": 13,
-									"alpha": -2.3758050170776235,
-									"distance": 1.4142135623730951,
+									"alpha": -4.0483429523763075,
+									"distance": 58.412327466040935,
 									"hostEdge": {
 										"$ref": "AAAAAAGTu0NaQbqKGA0="
 									},
 									"edgePosition": 1,
-									"text": "Uma proposta foi aceita"
+									"text": "Aluguel é gerado"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -927,8 +927,8 @@
 									"visible": null,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 314,
-									"top": 333,
+									"left": 272,
+									"top": 376,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -949,8 +949,8 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 270,
-									"top": 334,
+									"left": 272,
+									"top": 421,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -968,8 +968,7 @@
 							"tail": {
 								"$ref": "AAAAAAGTu0IMUbm4rZU="
 							},
-							"lineStyle": 1,
-							"points": "285:289;286:391",
+							"points": "272:288;272:412;296:412",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGTu0NaQbqLZR8="
@@ -1002,7 +1001,7 @@
 									},
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 398,
+									"left": 422,
 									"top": 391,
 									"width": 104.7998046875,
 									"height": 13,
@@ -1012,7 +1011,7 @@
 										"$ref": "AAAAAAGTu0Oiv7qhI6c="
 									},
 									"edgePosition": 1,
-									"text": "Aluguel foi gerado"
+									"text": "Cobrança é paga"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -1026,7 +1025,7 @@
 									"visible": null,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 450,
+									"left": 474,
 									"top": 376,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -1048,7 +1047,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 450,
+									"left": 474,
 									"top": 421,
 									"height": 13,
 									"alpha": -1.5707963267948966,
@@ -1068,7 +1067,7 @@
 								"$ref": "AAAAAAGTu0JZyLokm6Q="
 							},
 							"lineStyle": 1,
-							"points": "325:412;575:412",
+							"points": "373:412;575:412",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGTu0Oiv7qiCt0="
@@ -1322,8 +1321,8 @@
 							"font": "Arial;13;0",
 							"parentStyle": false,
 							"containerChangeable": true,
-							"left": 272,
-							"top": 464,
+							"left": 320,
+							"top": 472,
 							"width": 26,
 							"height": 26
 						},
@@ -1349,8 +1348,8 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 299,
-									"top": 441,
+									"left": 347,
+									"top": 445,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -1371,8 +1370,8 @@
 									"visible": null,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 314,
-									"top": 441,
+									"left": 362,
+									"top": 445,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -1393,8 +1392,8 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 270,
-									"top": 442,
+									"left": 318,
+									"top": 446,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -1413,7 +1412,7 @@
 								"$ref": "AAAAAAGTu0JZyLokm6Q="
 							},
 							"lineStyle": 1,
-							"points": "286:433;285:463",
+							"points": "334:433;333:471",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGTu0lcZLsUzRE="
@@ -1833,6 +1832,104 @@
 							"propertyLabel": {
 								"$ref": "AAAAAAGTu0n5n7tkePE="
 							}
+						},
+						{
+							"_type": "UMLTransitionView",
+							"_id": "AAAAAAGTu06/o7t0f5U=",
+							"_parent": {
+								"$ref": "AAAAAAGTu0HygLmhwuU="
+							},
+							"model": {
+								"$ref": "AAAAAAGTu06/o7tzUxo="
+							},
+							"subViews": [
+								{
+									"_type": "EdgeLabelView",
+									"_id": "AAAAAAGTu06/o7t1bb0=",
+									"_parent": {
+										"$ref": "AAAAAAGTu06/o7t0f5U="
+									},
+									"model": {
+										"$ref": "AAAAAAGTu06/o7tzUxo="
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 288,
+									"top": 327,
+									"width": 211.02783203125,
+									"height": 13,
+									"alpha": 2.462587430632153,
+									"distance": 73.24616030891995,
+									"hostEdge": {
+										"$ref": "AAAAAAGTu06/o7t0f5U="
+									},
+									"edgePosition": 1,
+									"text": "Passou da data limite de pagamento"
+								},
+								{
+									"_type": "EdgeLabelView",
+									"_id": "AAAAAAGTu06/o7t27+c=",
+									"_parent": {
+										"$ref": "AAAAAAGTu06/o7t0f5U="
+									},
+									"model": {
+										"$ref": "AAAAAAGTu06/o7tzUxo="
+									},
+									"visible": null,
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 335,
+									"top": 312,
+									"height": 13,
+									"alpha": 1.5707963267948966,
+									"distance": 30,
+									"hostEdge": {
+										"$ref": "AAAAAAGTu06/o7t0f5U="
+									},
+									"edgePosition": 1
+								},
+								{
+									"_type": "EdgeLabelView",
+									"_id": "AAAAAAGTu06/o7t3WXg=",
+									"_parent": {
+										"$ref": "AAAAAAGTu06/o7t0f5U="
+									},
+									"model": {
+										"$ref": "AAAAAAGTu06/o7tzUxo="
+									},
+									"visible": false,
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 336,
+									"top": 267,
+									"height": 13,
+									"alpha": -1.5707963267948966,
+									"distance": 15,
+									"hostEdge": {
+										"$ref": "AAAAAAGTu06/o7t0f5U="
+									},
+									"edgePosition": 1
+								}
+							],
+							"font": "Arial;13;0",
+							"parentStyle": false,
+							"head": {
+								"$ref": "AAAAAAGTu0IMUbm4rZU="
+							},
+							"tail": {
+								"$ref": "AAAAAAGTu0JZyLokm6Q="
+							},
+							"points": "336:392;336:288;324:288",
+							"showVisibility": true,
+							"nameLabel": {
+								"$ref": "AAAAAAGTu06/o7t1bb0="
+							},
+							"stereotypeLabel": {
+								"$ref": "AAAAAAGTu06/o7t27+c="
+							},
+							"propertyLabel": {
+								"$ref": "AAAAAAGTu06/o7t3WXg="
+							}
 						}
 					]
 				}
@@ -1964,7 +2061,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGTu0NaQbqJjek="
 									},
-									"name": "Uma proposta foi aceita"
+									"name": "Aluguel é gerado"
 								}
 							]
 						},
@@ -1987,7 +2084,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGTu0Oivrqg1MY="
 									},
-									"name": "Aluguel foi gerado"
+									"name": "Cobrança é paga"
 								}
 							]
 						},
@@ -2101,6 +2198,29 @@
 							"target": {
 								"$ref": "AAAAAAGTu0IMUbm3jNQ="
 							}
+						},
+						{
+							"_type": "UMLTransition",
+							"_id": "AAAAAAGTu06/o7tzUxo=",
+							"_parent": {
+								"$ref": "AAAAAAGTu0HygLmgIuM="
+							},
+							"source": {
+								"$ref": "AAAAAAGTu0JZyLoj+/I="
+							},
+							"target": {
+								"$ref": "AAAAAAGTu0IMUbm3jNQ="
+							},
+							"triggers": [
+								{
+									"_type": "UMLEvent",
+									"_id": "AAAAAAGTu08FmLuFD6c=",
+									"_parent": {
+										"$ref": "AAAAAAGTu06/o7tzUxo="
+									},
+									"name": "Passou da data limite de pagamento"
+								}
+							]
 						}
 					]
 				}
